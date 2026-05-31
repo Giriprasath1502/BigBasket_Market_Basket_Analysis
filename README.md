@@ -1,185 +1,149 @@
-# BigBasket Market Basket Analysis
+# Retail Market Basket Analysis using Apriori Algorithm
 
-## Overview
+## Project Overview
 
-This project performs Market Basket Analysis (MBA) using the BigBasket product dataset. The objective is to discover relationships between product categories and identify patterns that can help in cross-selling, recommendation systems, and retail analytics.
+This project performs Market Basket Analysis on retail transaction data using the Apriori Algorithm and Association Rule Mining techniques. The goal is to discover hidden purchasing patterns, identify frequently bought item combinations, and generate actionable business insights for recommendation systems and retail optimization.
 
-Since the dataset does not contain real customer transaction histories, pseudo-transactions were created by grouping products based on brand and sub-category relationships.
-
----
-
-## Dataset
-
-Dataset Used:
-
-[BigBasket Entire Product List Dataset](https://www.kaggle.com/datasets/surajjha101/bigbasket-entire-product-list-28k-datapoints?utm_source=chatgpt.com)
-
-Dataset Features:
-
-* Product Name
-* Category
-* Sub Category
-* Brand
-* Sale Price
-* Market Price
-* Rating
-* Description
+The analysis focuses on extracting meaningful associations between products using support, confidence, and lift metrics.
 
 ---
 
-## Technologies Used
+# Dataset
 
-* Python
-* Pandas
-* NumPy
-* Matplotlib
-* Seaborn
-* MLXtend
-* NetworkX
+The dataset contains retail transaction records including purchased products grouped by transactions.
 
----
+### Features Used
 
-## Workflow
-
-```text id="i18s2v"
-Dataset Loading
-    ↓
-Data Cleaning
-    ↓
-Pseudo Transaction Creation
-    ↓
-Transaction Encoding
-    ↓
-Apriori Algorithm
-    ↓
-Frequent Itemset Mining
-    ↓
-Association Rule Generation
-    ↓
-Visualization
-    ↓
-Business Insights
-```
+* Transaction IDs
+* Product Names
+* Basket Item Combinations
+* Purchase Frequency
 
 ---
 
-## Market Basket Analysis Process
+# Workflow
 
-### 1. Transaction Creation
+## 1. Data Preprocessing
 
-Since real transaction data was unavailable, transactions were simulated using:
+* Removed missing values
+* Grouped products by transactions
+* Converted transactional data into basket matrix format
+* Applied one-hot encoding
 
-```text id="x4m9c1"
-Brand → Grouped Sub Categories
-```
+## 2. Frequent Itemset Mining
 
-This allowed the creation of meaningful baskets for association rule mining.
+Used the Apriori algorithm to identify frequently occurring product combinations.
 
----
+## 3. Association Rule Generation
 
-### 2. Frequent Itemset Mining
-
-The Apriori algorithm was used to identify frequently occurring product combinations using support values.
-
-Metrics used:
+Generated association rules using:
 
 * Support
 * Confidence
 * Lift
 
+## 4. Visualization & Interpretation
+
+Created multiple visualizations to analyze:
+
+* Strong product associations
+* Frequent itemsets
+* Support vs confidence distribution
+* Product relationship networks
+
 ---
 
-### 3. Association Rule Mining
+# Models / Algorithms Used
 
-Association rules were generated to identify strong product relationships.
+| Algorithm              | Purpose                            |
+| ---------------------- | ---------------------------------- |
+| Apriori                | Frequent itemset generation        |
+| Association Rules      | Pattern discovery                  |
+| Network Graph Analysis | Product relationship visualization |
 
-Example:
+---
 
-```text id="zv8kcn"
-If customer buys Men's Grooming
-→ likely to buy Fragrances & Deos
+# Evaluation Metrics
+
+| Metric     | Description                                |
+| ---------- | ------------------------------------------ |
+| Support    | Frequency of item occurrence               |
+| Confidence | Probability of consequent given antecedent |
+| Lift       | Strength of association                    |
+
+---
+
+# Visualizations
+
+## Top Market Basket Associations
+
+![Top Associations](visualizations/top_market_basket_associations.png)
+
+---
+
+## Association Rules Heatmap
+
+![Heatmap](visualizations/association_rules_heatmap.png)
+
+---
+
+## Top Frequent Itemsets
+
+![Frequent Itemsets](visualizations/top_frequent_itemsets.png)
+
+---
+
+## Association Network Graph
+
+![Network Graph](visualizations/association_network_graph.png)
+
+---
+
+## Support vs Confidence Analysis
+
+![Scatter Plot](visualizations/support_vs_confidence.png)
+
+---
+
+# Results
+
+* Identified high-lift product combinations
+* Discovered strong purchasing relationships
+* Visualized association strength across products
+* Built interpretable retail insights for recommendation systems
+
+---
+
+# Future Improvements
+
+* FP-Growth implementation for scalability
+* Real-time recommendation system integration
+* Time-series purchasing behavior analysis
+* Customer segmentation integration
+* Interactive dashboard deployment
+
+---
+
+# Repository Structure
+
+```text
+Project/
+├── bigbasket-mba.ipynb
+├── README.md
+├── requirements.txt
+└── visualizations/
 ```
 
 ---
 
-## Key Insights
+# Requirements
 
-### Strong Product Associations
-
-| Antecedent                   | Consequent        | Lift  |
-| ---------------------------- | ----------------- | ----- |
-| Men's Grooming               | Fragrances & Deos | 10.22 |
-| Hair Care + Bath & Hand Wash | Skin Care         | 8.67  |
-| Skin Care + Bath & Hand Wash | Hair Care         | 7.99  |
-| Hair Care + Skin Care        | Bath & Hand Wash  | 7.98  |
-| Hair Care                    | Skin Care         | 5.19  |
-
----
-
-## Visualizations Included
-
-* Top Frequent Itemsets
-* Association Network Graph
-* Support vs Confidence Scatter Plot
-* Association Heatmap
-
----
-
-## Business Applications
-
-* Cross-selling
-* Product bundling
-* Retail recommendation systems
-* Shelf placement optimization
-* Personalized marketing
-* Customer behavior analysis
-
----
-
-## Limitations
-
-```text id="h15v1i"
-The dataset does not contain real customer purchase transactions.
-```
-
-Therefore, pseudo-transactions were generated for analytical purposes.
-
----
-
-## Results
-
-The project successfully identified meaningful associations between product categories and demonstrated how Market Basket Analysis can be applied in retail analytics even with limited transaction-level data.
-
----
-
-## Future Improvements
-
-* Use real customer transaction datasets
-* Implement FP-Growth algorithm
-* Build recommendation engine
-* Add interactive dashboards
-* Deploy analytics application
-
----
-
-## How to Run
-
-Install dependencies:
-
-```bash id="mjlwmv"
+```bash
 pip install pandas numpy matplotlib seaborn mlxtend networkx
 ```
 
-Run the notebook step by step to:
-
-* Load dataset
-* Generate transactions
-* Mine association rules
-* Visualize relationships
-* Generate business insights
-
 ---
 
-## Conclusion
+# Conclusion
 
-This project demonstrates the use of association rule mining techniques on retail product data to uncover hidden product relationships and generate actionable business insights for e-commerce and retail platforms like BigBasket.
+This project demonstrates how Market Basket Analysis can uncover hidden relationships between products and assist retailers in improving recommendations, cross-selling strategies, and inventory planning using data-driven insights.
